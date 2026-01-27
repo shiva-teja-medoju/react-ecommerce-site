@@ -8,6 +8,7 @@ import Banner from "../components/Banner";
 
 
 
+
 function CentralPage(){
     return(
         <>
