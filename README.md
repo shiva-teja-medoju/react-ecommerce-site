@@ -1,98 +1,58 @@
-# 🛒 E-Shopping Application  
-**A Modern Full-Stack E-Commerce Experience Built with React & Redux**
+# 🛒 E-Shopping Application
+**A Modern, Scalable E-Commerce Experience Built with React, Redux, and TypeScript**
 
-Welcome to **E-Shopping**, a sleek, responsive, and scalable e-commerce web application crafted for modern shoppers.  
-From browsing curated products to completing secure checkouts — this project delivers a real-world shopping experience powered by cutting-edge front-end technologies.  
-
-> 💡 *Built with performance, scalability, and clean UI/UX in mind — perfect for developers, learners, and recruiters exploring full-stack craftsmanship.*
+Welcome to **E-Shopping**, a high-performance, responsive e-commerce web application. This project demonstrates professional front-end architecture, including robust state management, automated testing, and a seamless user journey from product discovery to checkout.
 
 ---
-🔗Try AURA Live: [Live Demo](https://react-ecommerce-site-git-main-shiva-teja-medojus-projects.vercel.app/)
+🔗 **Live Demo:** [Try AURA Live](https://react-ecommerce-site-two.vercel.app/)
 ---
 
-## ✨ Project Highlights
+## ✨ Key Features
 
-| Feature | Description |
-|----------|-------------|
-| 👤 **User Authentication** | Secure sign-up, login, and logout with session management. |
-| 🛍️ **Product Catalog** | Intuitive product listing with search and filtering for a seamless browsing experience. |
-| 📄 **Product Details** | Dedicated product view with rich descriptions, pricing, and high-quality imagery. |
-| 🛒 **Shopping Cart** | Add, update, and remove items — dynamically synced across user sessions. |
-| 💳 **Smart Checkout Flow** | Guided, multi-step checkout process for smooth and secure transactions. |
-| ⚙️ **User Profile Dashboard** | Manage personal details and order history with ease. |
+| Feature | Technical Implementation |
+| :--- | :--- |
+| 👤 **Secure Authentication** | Custom logic for sign-up/login with persistence. |
+| 🛍️ **Dynamic Catalog** | Product listing with category filtering and real-time search. |
+| 🛒 **Advanced Cart System** | Redux-powered cart with quantity controls and local storage sync. |
+| 🍞 **Toast Notifications** | Real-time UI feedback using `react-toastify`. |
+| 🧪 **Unit Testing** | Component and logic verification via `Vitest` and `React Testing Library`. |
+| 📱 **Responsive Design** | Mobile-first approach for seamless shopping across all devices. |
 
 ---
 
-## 🧠 Behind the Scenes — Tech Stack
+## 🧠 Tech Stack & Tooling
 
-| Category | Technologies |
-|-----------|---------------|
-| 🖥️ **Frontend** | React.js, JavaScript(ES6+), HTML(via JSX |
-| 🔁 **State Management** | Redux Toolkit |
-| 🛣️ **Routing** | React Router (react-router-dom) |
-| 🎨 **Styling** | HTML5, CSS3 *(optionally compatible with Tailwind or Material-UI)* |
-| ⚙️ **Build Tool** | Vite |
-| 🌐 **API Communication** | Browser Fetch API |
-| 💻 **Environment** | Node.js(npm/yarn) |
+### Core Architecture
+- **Frontend:** React 19 (Functional Components & Hooks)
+- **State Management:** Redux Toolkit (Slices & Async Thunks)
+- **Routing:** React Router 7
+- **Language:** JavaScript (ES6+) & TypeScript for Type Safety
+
+### Development & DevOps
+- **Build Tool:** [Vite](https://vitejs.dev/) (Ultra-fast HMR)
+- **Package Manager:** [pnpm](https://pnpm.io/) (High-performance disk usage)
+- **Testing:** Vitest & React Testing Library
+- **Deployment:** Vercel (CI/CD Pipeline)
 
 ---
 
 ## 🧩 Architecture Overview
 
-The application is structured for **modular growth** — enabling easy integration of APIs, payment gateways, and additional microservices.  
-Each component communicates efficiently through Redux state slices, ensuring smooth UI reactivity and minimal data redundancy.
-
-![E-Shopping Application Preview](https://github.com/user-attachments/assets/9ee8cbd9-3229-4bce-bd19-fb980043223f)
+The application follows a **modular structure** designed for scalability:
+- **Redux Slices:** Decoupled logic for Auth, Cart, and Products.
+- **Components:** Atomic design principles for reusable UI elements.
+- **Testing:** Integrated unit tests to ensure reliability across updates.
 
 ---
 
 ## 🚀 Getting Started
 
-### ✅ Prerequisites  
-Make sure the following tools are installed on your system:
-- **Node.js** (v18+ recommended)  
-- **npm** (Node Package Manager)  
-- **Git**
+### ✅ Prerequisites
+- **Node.js:** v18.0 or higher
+- **pnpm:** v10.x recommended
 
----
-
-### ⚙️ Installation Steps  
+### ⚙️ Installation & Setup
 
 **1. Clone the Repository**
 ```bash
-git clone https://github.com/shivatej2303/react-ecommerce-site.git
-```
-
-**2. Navigate to Project Directory**
-```bash
-cd E-Shopping-Application
-```
-
-**3. Install Dependencies**
-```bash
-npm install
-```
-
----
-
-### Run the Application
-
-**Start the local development server:**
-```bash
-npm run dev
-```
-
----
-
-### 💡 Author
-
-## Shiva Teja Medoju
-> Passionate Full-Stack Developer | Building Scalable Web pages
-
-
-📧 Connect on [LinkedIn](https://www.linkedin.com/in/shivatejamedoju)
-[Email](shivatejamedoju@gmail.com)
-
-
-
-
+git clone [https://github.com/shiva-teja-medoju/react-ecommerce-site.git](https://github.com/shiva-teja-medoju/react-ecommerce-site.git)
