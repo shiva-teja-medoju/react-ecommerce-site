@@ -27,11 +27,13 @@ From browsing curated products to completing secure checkouts — this project d
 
 | Category | Technologies |
 |-----------|---------------|
-| 🖥️ **Frontend** | React.js |
+| 🖥️ **Frontend** | React.js, JavaScript(ES6+), HTML(via JSX |
 | 🔁 **State Management** | Redux Toolkit |
+| 🛣️ **Routing** | React Router (react-router-dom) |
 | 🎨 **Styling** | HTML5, CSS3 *(optionally compatible with Tailwind or Material-UI)* |
 | ⚙️ **Build Tool** | Vite |
-| 🌐 **API Communication** | Axios / Fetch API |
+| 🌐 **API Communication** | Browser Fetch API |
+| 💻 **Environment** | Node.js(npm/yarn) |
 
 ---
 
