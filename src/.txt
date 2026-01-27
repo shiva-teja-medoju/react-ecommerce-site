@@ -28,7 +28,7 @@ From browsing curated products to completing secure checkouts — this project d
 | Category | Technologies |
 |-----------|---------------|
 | 🖥️ **Frontend** | React.js, JavaScript(ES6+), HTML(via JSX |
-|  **State Management** | Redux Toolkit |
+| 🔁 **State Management** | Redux Toolkit |
 | 🛣️ **Routing** | React Router (react-router-dom) |
 | 🎨 **Styling** | HTML5, CSS3 *(optionally compatible with Tailwind or Material-UI)* |
 | ⚙️ **Build Tool** | Vite |
@@ -92,7 +92,3 @@ npm run dev
 
 📧 Connect on [LinkedIn](https://www.linkedin.com/in/shivatejamedoju)
 [Email](shivatejamedoju@gmail.com)
-
-
-
-
