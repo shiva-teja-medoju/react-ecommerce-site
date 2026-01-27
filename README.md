@@ -20,19 +20,22 @@ Welcome to **E-Shopping**, a high-performance, responsive e-commerce web applica
 
 ---
 
+
 ## 🧠 Tech Stack & Tooling
 
-### Core Architecture
-- **Frontend:** React 19 (Functional Components & Hooks)
-- **State Management:** Redux Toolkit (Slices & Async Thunks)
-- **Routing:** React Router 7
-- **Language:** JavaScript (ES6+) & TypeScript for Type Safety
-
-### Development & DevOps
-- **Build Tool:** [Vite](https://vitejs.dev/) (Ultra-fast HMR)
-- **Package Manager:** [pnpm](https://pnpm.io/) (High-performance disk usage)
-- **Testing:** Vitest & React Testing Library
-- **Deployment:** Vercel (CI/CD Pipeline)
+| Category | Technologies & Tools |
+| :--- | :--- |
+| 🖥️ **Frontend Core** | **React 19** (Functional Components, Hooks) |
+| 🛡️ **Languages** | **TypeScript** (Type Safety) & JavaScript (ES6+) |
+| 🔁 **State Management** | **Redux Toolkit** (Slices, Async Thunks) |
+| 🛣️ **Routing** | **React Router 7** |
+| 🎨 **Styling & UI** | HTML5, CSS3 (Modular & Responsive Design) |
+| ⚙️ **Build Tool** | **Vite** (Ultra-fast Hot Module Replacement) |
+| 📦 **Package Manager** | **pnpm** (High-performance dependency management) |
+| 🧪 **Testing Suite** | **Vitest** & **React Testing Library** |
+| 🌐 **API Interaction** | Browser Fetch API |
+| 🚀 **Deployment** | **Vercel** (Automated CI/CD Pipeline) |
+| 💻 **Environment** | Node.js (v18+) |
 
 ---
 
@@ -42,17 +45,52 @@ The application follows a **modular structure** designed for scalability:
 - **Redux Slices:** Decoupled logic for Auth, Cart, and Products.
 - **Components:** Atomic design principles for reusable UI elements.
 - **Testing:** Integrated unit tests to ensure reliability across updates.
-
+![E-Shopping Application Preview](https://github.com/user-attachments/assets/9ee8cbd9-3229-4bce-bd19-fb980043223f)
 ---
 
 ## 🚀 Getting Started
 
-### ✅ Prerequisites
-- **Node.js:** v18.0 or higher
-- **pnpm:** v10.x recommended
+### ✅ Prerequisites  
+Make sure the following tools are installed on your system:
+- **Node.js** (v18+ recommended)  
+- **npm** (Node Package Manager)  
+- **Git**
 
-### ⚙️ Installation & Setup
+---
+
+### ⚙️ Installation Steps  
 
 **1. Clone the Repository**
 ```bash
-git clone [https://github.com/shiva-teja-medoju/react-ecommerce-site.git](https://github.com/shiva-teja-medoju/react-ecommerce-site.git)
+git clone https://github.com/shivatej2303/react-ecommerce-site.git
+```
+
+**2. Navigate to Project Directory**
+```bash
+cd E-Shopping-Application
+```
+
+**3. Install Dependencies**
+```bash
+npm install
+```
+
+---
+
+### Run the Application
+
+**Start the local development server:**
+```bash
+npm run dev
+```
+
+---
+
+### 💡 Author
+
+## Shiva Teja Medoju
+> Passionate Full-Stack Developer | Building Scalable Web pages
+
+
+📧 Connect on [LinkedIn](https://www.linkedin.com/in/shivatejamedoju)
+[Email](shivatejamedoju@gmail.com)
