@@ -1,35 +1,43 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 import logoImg from '../../assets/AURA-logo.png';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowCart } from "../../redux/cartSlice";
-import './Navbar.css'
+import { setSearchTerm } from "../../redux/searchSlice";
 import CartItem from "./Cart";
 import { Signup } from "../../signup/Signup";
 import { Login } from "../../signup/Login";
 import { clearUser } from "../../redux/authSlice";
+import './Navbar.css'
 
 
 const Navbar = () => {
-    // useDispatch hook to send actions to the Redux store.
     const dispatch = useDispatch();
-    // useSelector hook to get cart visibility state and total quantity from the Redux store.
     const { showCart, totalQuantity } = useSelector((state) => state.cart);
-    // Get user state from the auth slice
     const { user } = useSelector((state) => state.auth);
-    // useState hooks to manage the visibility of the Signup and Login modals.
     const [showSignup, setShowSignup] = useState(false);
     const [showLogin, setShowLogin] = useState(false);
 
-    // This function handles the logic to switch from the Signup modal to the Login modal.
     const handleSwitchToLogin = () => {
-        setShowSignup(false); // Close Signup modal
-        setShowLogin(true);    // Open Login modal
+        setShowSignup(false);
+        setShowLogin(true);
+    };
+
+    const handleSearch = (e) => {
+        dispatch(setSearchTerm(e.target.value));
+    };
+
+    const handleOpenCart = () => {
+        if (!user) {
+            toast.warning("Please Login to view Cart");
+        } else {
+            dispatch(setShowCart());
+        }
     };
 
     return(
         <div className="header-wrapper">
-            {/* Main navbar container */}
             <div className="navbar">
                <Link to={'/'} className="logo-link">
                 <div className="logo-container-wrapper">
@@ -42,10 +50,14 @@ const Navbar = () => {
                </Link>
     
                 <div className="search">
-                    <input type="text" className="search-input" placeholder="Search Aura.in" />
+                    <input 
+                        type="text" 
+                        className="search-input" 
+                        placeholder="Search Aura.in"
+                        onChange={handleSearch} 
+                    />
                 </div>
     
-                {/* Conditionally render user info or signup button */}
                 {user ? (
                     <div className="user-info">
                         <span className="user-name">Hello, {user.name}</span>
@@ -57,42 +69,51 @@ const Navbar = () => {
                     </div>
                 )}
 
-                {/* Cart button that shows the cart modal. It also displays the total quantity if > 0. */}
-                <button className="Cart-btn" onClick={() => dispatch(setShowCart())}>
+                <button className="Cart-btn" onClick={handleOpenCart}>
                     Cart {totalQuantity > 0 && `(${totalQuantity})`}
                 </button>
-                {/* Conditionally render the Cart, Signup, and Login modals based on their state. */}
                 {showCart && <CartItem />}
                 {showSignup && <Signup onClose={() => setShowSignup(false)} onSwitchToLogin={handleSwitchToLogin} />}
                 {showLogin && <Login onClose={() => setShowLogin(false)} />}
     
             </div>
-            {/* Secondary navigation bar for product categories */}
             <div className="nav-links">
                 <ul className="nav-items">
 
                     <li>
-                      <Link to={'/'}>Home</Link>
+                      <button className="nav-button">
+                        <Link to={'/'}>Home</Link>
+                      </button>
                     </li>
 
                     <li>
-                      <Link to='/clothes'>Clothes</Link>
+                      <button className="nav-button">
+                        <Link to='/clothes'>Clothes</Link>
+                      </button>
                     </li>
 
                     <li>
-                      <Link to= '/electronics'>Electronics</Link>
+                      <button className="nav-button">
+                        <Link to= '/electronics'>Electronics</Link>
+                      </button>
                     </li>
 
                     <li>
-                      <Link to = '/furniture'>Furniture</Link>
+                     <button className="nav-button">
+                         <Link to = '/furniture'>Furniture</Link>
+                     </button>
                     </li>
 
                     <li>
-                      <Link to = '/shoes'>Shoes</Link>
+                      <button className="nav-button">
+                        <Link to = '/shoes'>Shoes</Link>
+                      </button>
                     </li>
 
                     <li>
-                      <Link to = '/miscellaneous'>Miscellaneous</Link>
+                      <button className="nav-button">
+                        <Link to = '/miscellaneous'>Miscellaneous</Link>
+                      </button>
                     </li>
 
                 </ul>

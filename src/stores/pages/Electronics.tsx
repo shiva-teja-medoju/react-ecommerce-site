@@ -1,41 +1,57 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../App.css";
 import Navbar from "../components/Navbar";
 import { addToCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ProductsNotFound } from "./ProductsNotFound";
+import LoadingSpinner from "../components/LoadingSpinner";
 
+// --- Interfaces for the external API ---
+interface Category {
+  id: number;
+  name: string;
+}
 
-function ElectronicsSection() {
+interface Product {
+  id: number;
+  title: string;
+  price: number;
+  images: string[];
+  category?: Category | null;
+}
+
+const ElectronicsSection: React.FC = () => {
   // State to store the fetched data, loading status, and any errors.
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     // Define the async function to fetch data inside useEffect
     async function fetchData() {
       try {
-        const response = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=50');
+        const response = await fetch(
+          "https://api.escuelajs.co/api/v1/products?offset=0&limit=50"
+        );
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const result = await response.json();
+        const result = (await response.json()) as unknown as Product[];
 
         // Filter for "Electronics" and ensure the product has valid images.
         const electronicsProducts = result.filter(
           (product) =>
-            product.category.name === 'Electronics' &&
+            product.category?.name === "Electronics" &&
             Array.isArray(product.images) &&
             product.images.length > 0
         );
-        
+
         console.log(electronicsProducts);
         setProducts(electronicsProducts);
-      } catch (e) {
-        setError(e.message);
+      } catch (e: unknown) {
+        setError((e as Error)?.message ?? String(e));
       } finally {
         setLoading(false);
       }
@@ -45,7 +61,7 @@ function ElectronicsSection() {
     fetchData();
   }, []); // The empty dependency array [] ensures this effect runs only once.
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <div><LoadingSpinner /></div>;
   if (error) return <div>Error: {error}</div>;
 
   // Render the fetched data
@@ -87,5 +103,4 @@ function ElectronicsSection() {
     </>
   );
 }
-
 export default ElectronicsSection;

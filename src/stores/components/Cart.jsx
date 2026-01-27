@@ -9,12 +9,9 @@ const CartItem = () =>{
   const navigate = useNavigate();
   const { itemList: cartItems, totalAmount } = useSelector((state) => state.cart);
 
-  /**
-   * Handles the checkout process by closing the cart and navigating to the checkout page.
-   */
   const handleCheckout = () => {
-    dispatch(setShowCart(false)); // Close the cart modal
-    navigate('/checkout'); // Navigate to the checkout page
+    dispatch(setShowCart(false));
+    navigate('/checkout');
   };
   
   return (

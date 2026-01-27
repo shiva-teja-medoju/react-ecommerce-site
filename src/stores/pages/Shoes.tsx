@@ -1,37 +1,48 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../../App.css";
 import Navbar from "../components/Navbar";
 import { addToCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ProductsNotFound } from "./ProductsNotFound";
+import LoadingSpinner from "../components/LoadingSpinner";
 
+interface Category{
+  id: number;
+  name: string
+}
 
+interface Product{
+  id: number;
+  title: string;
+  price: number;
+  images: string[];
+  category?: Category | null;
+}
 
-function MiscellaneousSection() {
+const  ShoesSection: React.FC = () => {
   // State to store the fetched data, loading status, and any errors.
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
-
 
 
   useEffect(() => {
     // Define the async function to fetch data inside useEffect
     async function fetchData() {
       try {
-        const response = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=50');
+        const response = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=20');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const result = await response.json();
+        const result: Product[] = await response.json();
         // The category from this API is an object, so we need to check product.category.name
         // I've also added a check to ensure product.images is a valid array.
-        const MiscellaneousProducts = result.filter(product => product.category.name === 'Miscellaneous' && Array.isArray(product.images) && product.images.length > 0);
-        console.log(MiscellaneousProducts);
-        setProducts(MiscellaneousProducts);
-      } catch (e) {
+        const ShoesProducts = result.filter(product => product.category?.name === 'Shoes' && Array.isArray(product.images) && product.images.length > 0);
+        console.log(ShoesProducts);
+        setProducts(ShoesProducts);
+      } catch (e: any) {
         setError(e.message);
       } finally {
         setLoading(false);
@@ -42,7 +53,7 @@ function MiscellaneousSection() {
     fetchData();
   }, []); // The empty dependency array [] ensures this effect runs only once when the component mounts.
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <LoadingSpinner />;
   if (error) return <div>Error: {error}</div>;
 
   // Render the fetched data
@@ -50,29 +61,27 @@ function MiscellaneousSection() {
     <>
     <Navbar />
       <div className="product-container">
-      <h1 className="product-title">Miscellaneous</h1>
+      <h1 className="product-title">Shoes</h1>
       <div className="pro-section">
         {products.length > 0 ? (
           products.map(product => (
             <div key={product.id} className="product-card">
-              <Link to= {`/product/${product.id}`} className="product-link">
+              <Link to={`/product/${product.id}`} className="product-link">
               <img src={product.images[0]} alt={product.title} className="product-image" />
               </Link>
               <h4>{product.title}</h4>
               <div className="product-details">
                  <p className="product-price">${product.price}</p>
-                 <button className="add-to-cart-button" onClick={()=> dispatch(addToCart(product))}>Add to Cart</button>
+                 <button className="add-to-cart-button" onClick={()=> dispatch(addToCart(product))}> Add to Cart</button>
               </div>
             </div>
           ))
         ) : (
-         <div> 
-          <ProductsNotFound />
-         </div>
+          <p><ProductsNotFound /></p>
         )}
       </div>
     </div>
     </>
   );
 }
-export default MiscellaneousSection;
+export default ShoesSection;

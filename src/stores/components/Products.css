@@ -16,11 +16,14 @@
     color: var(--color-text);
 }
 .product-image{
-    height: 320px;
-    width: 280px;
+    height: 300px;
+    width: 300px;
     object-fit: contain; /* Ensures images cover the area without distortion */
     max-width: 100%; /* Makes images responsive within their container */
     border-radius: var(--border-radius);
+    margin-top: 10px;
+    margin-bottom: 10px
+    
 }
 .product-details{
     display: inline-flex;
@@ -44,6 +47,13 @@
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
+.product-price, .add-to-cart-button{
+    display: flexbox;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    
+}
 
 /* Styling for individual product cards */
 .product-card, .img-box {
@@ -55,6 +65,7 @@
     border-radius: var(--border-radius);
     padding: 15px;
     box-shadow: var(--shadow-light);
+    cursor: pointer;
     /* Ensure consistent height and layout for product cards */
     justify-content: space-between;
     transition: transform 0.3s ease, box-shadow 0.3s ease;

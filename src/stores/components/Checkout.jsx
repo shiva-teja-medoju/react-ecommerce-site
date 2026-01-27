@@ -1,24 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+
+import { toast } from 'react-toastify';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { clearCart } from '../../redux/cartSlice';
 import './Checkout.css';
 import Navbar from './Navbar';
 
 const Checkout = () => {
   const { itemList: cartItems, totalAmount } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
   const handlePlaceOrder = (e) => {
     e.preventDefault();
-    // TODO: Implement order placement logic (e.g., API call to your backend)
-    console.log('Placing order with:', { cartItems, totalAmount });
-    alert('Order placed successfully! (This is a simulation)');
+    dispatch(clearCart());
+    toast.success("Order Received Successfully!");
   };
 
   if (cartItems.length === 0) {
     return (
       <div className="checkout-page-container empty-checkout">
-        <h2>Your Cart is Empty</h2>
-        <p>You have no items in your cart to check out.</p>
+        <Navbar />
+        <h2>Your Order Placed Successfully!</h2>
         <Link to="/" className="btn-primary">Continue Shopping</Link>
       </div>
     );
