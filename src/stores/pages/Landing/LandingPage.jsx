@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import "./LandingPage.css";
-import background from "../../../assets/background.png"
 import frontMan from "../../../assets/frontMan.png";
 import clothes from "../../../assets/clothes.png"
 import footwear from "../../../assets/footwear.png"

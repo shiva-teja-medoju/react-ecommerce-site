@@ -22,14 +22,29 @@ interface Product {
   category?: Category | null;
 }
 
+const sanitizeImages = (images: any[]): string[] => {
+  if (!Array.isArray(images)) return [];
+  return images.map(img => {
+    if (typeof img === 'string' && (img.startsWith('["') || img.startsWith("['"))) {
+      try {
+        const parsed = JSON.parse(img.replace(/'/g, '"'));
+        return Array.isArray(parsed) ? parsed[0] : img;
+      } catch (e) {
+        return img.replace(/\["|"]/g, '').replace(/\['|']/g, '');
+      }
+    }
+    return img;
+  });
+};
+
 const ClothesSection: React.FC = () => {
   const [products, setProducts] = useState<Product[]>(() => {
-    const cached = localStorage.getItem("products_cache");
+    const cached = localStorage.getItem("products_cache_v2");
     return cached ? JSON.parse(cached) : [];
   });
 
   const [loading, setLoading] = useState<boolean>(
-    () => !localStorage.getItem("products_cache")
+    () => !localStorage.getItem("products_cache_v2")
   );
 
   const [error, setError] = useState<string | null>(null);
@@ -49,7 +64,12 @@ const ClothesSection: React.FC = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const result: Product[] = await response.json();
+        const rawData: Product[] = await response.json();
+
+        const result = rawData.map(product => ({
+          ...product,
+          images: sanitizeImages(product.images)
+        }));
 
         // Keep only valid products (same base dataset as Products.jsx)
         const validProducts = result.filter(
@@ -58,7 +78,7 @@ const ClothesSection: React.FC = () => {
 
         // Store once for ALL pages
         localStorage.setItem(
-          "products_cache",
+          "products_cache_v2",
           JSON.stringify(validProducts)
         );
 
