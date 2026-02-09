@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import Navbar from "../components/Navbar";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { addToCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -21,41 +23,66 @@ interface Product {
   category?: Category | null;
 }
 
+const sanitizeImages = (images: any[]): string[] => {
+  if (!Array.isArray(images)) return [];
+  return images.map(img => {
+    if (typeof img === 'string' && (img.startsWith('["') || img.startsWith("['"))) {
+      try {
+        const parsed = JSON.parse(img.replace(/'/g, '"'));
+        return Array.isArray(parsed) ? parsed[0] : img;
+      } catch (e) {
+        return img.replace(/\["|"]/g, '').replace(/\['|']/g, '');
+      }
+    }
+    return img;
+  });
+};
+
 const FurnitureSection: React.FC = () => {
   const [products, setProducts] = useState<Product[]>(() => {
-    const cachedData = localStorage.getItem("products_cache");
+    const cachedData = localStorage.getItem("products_cache_v2");
     return cachedData ? JSON.parse(cachedData) : [];
   });
 
   const [loading, setLoading] = useState<boolean>(
-    () => !localStorage.getItem("products_cache")
+    () => !localStorage.getItem("products_cache_v2")
   );
 
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
 
+  const handleAddToCart = (product: Product) => {
+    dispatch(addToCart(product));
+    toast.success("Item added to cart");
+  };
+
   useEffect(() => {
     // Same cache-first logic as Products.jsx
-    if (products.length > 0) return;
+    if (products.length > 50) return;
 
     async function fetchData() {
       try {
         const response = await fetch(
-          "https://api.escuelajs.co/api/v1/products?offset=0&limit=50"
+          "https://api.escuelajs.co/api/v1/products?offset=0&limit=200"
         );
 
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
 
-        const result: Product[] = await response.json();
+        const rawData: Product[] = await response.json();
+
+        const result = rawData.map(product => ({
+          ...product,
+          images: sanitizeImages(product.images)
+        }));
 
         const validProducts = result.filter(
           (p) => Array.isArray(p.images) && p.images.length > 0
         );
 
         localStorage.setItem(
-          "products_cache",
+          "products_cache_v2",
           JSON.stringify(validProducts)
         );
 
@@ -84,6 +111,7 @@ const FurnitureSection: React.FC = () => {
   return (
     <>
       <Navbar />
+      <ToastContainer position="bottom-right" />
 
       <div className="product-container">
         <h1 className="product-title">Furniture</h1>
@@ -111,7 +139,7 @@ const FurnitureSection: React.FC = () => {
 
                   <button
                     className="add-to-cart-button"
-                    onClick={() => dispatch(addToCart(product))}
+                    onClick={() => handleAddToCart(product)}
                   >
                     Add to Cart
                   </button>
