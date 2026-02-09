@@ -45,7 +45,7 @@ The application follows a **modular structure** designed for scalability:
 - **Redux Slices:** Decoupled logic for Auth, Cart, and Products.
 - **Components:** Atomic design principles for reusable UI elements.
 - **Testing:** Integrated unit tests to ensure reliability across updates.
-![E-Shopping Application Preview](https://github.com/user-attachments/assets/9ee8cbd9-3229-4bce-bd19-fb980043223f)
+![E-Shopping Application Preview](https://github.com/user-attachments/assets/ae209311-cb62-4ee7-a374-7d3e0ce7de20)
 ---
 
 ## 🚀 Getting Started
