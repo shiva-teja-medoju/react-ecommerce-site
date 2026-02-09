@@ -62,27 +62,57 @@ Make sure the following tools are installed on your system:
 
 **1. Clone the Repository**
 ```bash
-git clone https://github.com/shivatej2303/react-ecommerce-site.git
+git clone [https://github.com/shiva-teja-medoju/react-ecommerce-site.git](https://github.com/shiva-teja-medoju/react-ecommerce-site.git)
 ```
 
 **2. Navigate to Project Directory**
 ```bash
-cd E-Shopping-Application
+cd react-ecommerce-site
 ```
 
 **3. Install Dependencies**
 ```bash
-npm install
+pnpm install
+```
+
+**4. Create Environment File Create a file named .env in the root folder and add:**
+```bash
+VITE_API_BASE_URL=[https://api.escuelajs.co/api/v1](https://api.escuelajs.co/api/v1)
+```
+
+**5. Run the Application (Development Mode)**
+```bash
+pnpm dev
+```
+
+**6. Running Tests**
+```bash
+pnpm test
+```
+
+**7. Build for Production**
+```bash
+pnpm build
+```
+
+**8. Preview production build**
+```bash
+pnpm preview
+```
+
+**9. Install Dependencies**
+```bash
+pnpm install
+```
+
+**10. Install Dependencies**
+```bash
+pnpm install
 ```
 
 ---
 
-### Run the Application
 
-**Start the local development server:**
-```bash
-npm run dev
-```
 
 ---
 
