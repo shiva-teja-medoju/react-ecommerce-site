@@ -2,6 +2,8 @@
 import {useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import { addToCart } from "../../redux/cartSlice";
 import './Products.css'
 import LoadingSpinner from "./LoadingSpinner";
@@ -55,22 +57,31 @@ function ProductsSection() {
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleAddProduct = (product) => {
+    dispatch(addToCart(product));
+    toast.success("Item added to cart");
+  };
+
 
   return (
     <>
-        <div className="Product-container">
+    <ToastContainer position="bottom-right" />
+    <div className="Product-container">
       <h1 className="product-title">All Products</h1>
       <div className="pro-section">
        {filteredProducts.length > 0 ? (
           filteredProducts.map(product => (
             <div key={product.id} className="product-card">
-             <Link to={`/product/${product.id}`} className="product-link">
+             <Link 
+             to={`/product/${product.id}`} 
+             className="product-link"
+             state={{product}}>
               <img src={product.images[0]} alt={product.title} className="product-image" loading="lazy" decoding="async" />
               </Link>
               <h4 className="product-name">{product.title}</h4>
               <div className="product-details">
                  <p className="product-price">${product.price}</p>
-                 <button className="add-to-cart-button" onClick={() => dispatch(addToCart(product))}>Add to Cart</button>
+                 <button className="add-to-cart-button" onClick={() => handleAddProduct(product)}>Add to Cart</button>
               </div> 
             </div>
           ))

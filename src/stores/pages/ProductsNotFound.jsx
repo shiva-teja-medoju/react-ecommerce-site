@@ -12,7 +12,7 @@ export const ProductsNotFound = () => {
             <p>Maybe try a different search or explore other options?</p>
           </div>
           <div className="action-buttons">
-            <Link to = {'/'}>
+            <Link to = {'/products'}>
             <button className="browse-button" >Browse All Products</button>
             </Link>
             <Link to={'/'}>

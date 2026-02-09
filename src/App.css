@@ -23,11 +23,17 @@
 /* General body styles for a clean look */
 body {
     font-family: var(--font-primary);
-    margin: 40px;
-    background-color: var(--color-background);
+    margin: 0;
+    background-color: #F3E9D8;
     color: var(--color-text);
-    /* Add padding to the top to push content down below the fixed navbar */
-    padding-top: 140px; /* Increased padding for the new nav links */
+    margin-left: 150px;
+    margin-right: 150px;
+}
+
+.project-container {
+    margin-left: 150px;
+    margin-right: 150px;
+    padding-top: 140px;
 }
 
 
@@ -58,7 +64,7 @@ body {
 
 /* For Mobile Devices */
 @media (max-width: 768px) {
-    body {
+    .project-container {
         margin: 20px;
         padding-top: 180px; /* Adjust for potentially wrapped navbar */
     }

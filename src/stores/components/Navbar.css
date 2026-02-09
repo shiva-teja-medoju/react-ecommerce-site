@@ -1,28 +1,102 @@
-/* ==========================================================================
-   Header & Navigation
-   ========================================================================== */
-/* New wrapper for the entire fixed header */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap');
+
+
 .header-wrapper {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000; /* Ensure header stays on top */
-    background-color: var(--color-background);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Softer, more modern shadow */
+    z-index: 1000;
+    background-color: #bd6822;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
+    color: var(--color-text);
+}
+.navbar {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 5px 60px;
+}
+.page-title {
+    display: flex;
+    justify-content: flex-start;
 }
 
-/* Navbar container */
-.navbar {
+.links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    color: white;
+}
+
+.links a {
+    text-decoration: none;
+    color: #38240D;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.links h4{
+    font-family: 'Oswald', sans-serif;
+    font-style: bold;
+}
+
+.links a:hover {
+    color: var(--color-secondary);
+}
+
+.cart-search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+.dropdown-container {
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Vertically center items */
-    padding: 15px 40px; /* Increase vertical padding for more breathing room */
-    gap: 30px; /* Increase space between items */
+    height: 100%;
 }
 
-/* Logo styles */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    padding: 10px 0;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    animation: fadeInDropdown 0.2s ease-in-out;
+}
+
+.dropdown-menu a {
+    display: block;
+    text-decoration: none;
+    color: #333 !important;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f3f4f6;
+    color: var(--color-primary) !important;
+}
+
+@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
 .logo-container-wrapper {
     display: flex;
     flex-direction: column;
@@ -30,50 +104,48 @@
     text-decoration: none;
 }
 
+
 .logo-container {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex-shrink: 0; /* Prevent the logo from shrinking */
+    margin-left: -60px;
 }
 
 .logo-image {
-    height: 80px;
-    
+    height: 90px;
+    margin-right: -30px;
 }
-
 .logo {
     margin-top: 0%;
     font-size: 35px;
     font-weight: bold;
-    color: var(--color-primary);
-    font-family: var(--font-logo);
+    color: white !important;
+    font-family: 'Oswald', sans-serif;
     text-decoration: none;
 }
+
 .logo-link,
-.logo-link * { /* Targets the link AND everything inside it */
+.logo-link * {
   text-decoration: none !important;
-  color: inherit !important;
 }
 
 .tagline {
-    margin: -29px 0 0 0; /* Adjust to align under the new logo/text combo */
-    padding-left: 90px; /* Align with the start of the "AURA" text */
+    margin: -29px 0 0 0;
+    padding-left: 50px;
     font-size: 12px;
-    color: #7f8c8d;
+    color: white;
     font-style: italic;
 }
-
-/* Search input styles */
 .search-input {
     padding: 10px 18px;
     border: 1px solid #dfe1e5;
     border-radius: 20px;
-    width: 500px; /* Use 100% to be responsive within its container */
-    max-width: 500px; /* Set a max-width to prevent it from getting too large */
+    width: 200px;
+    max-width: 300px;
     font-size: 16px;
     transition: all 0.3s ease;
-    background-color: #f1f3f4; /* Light grey background */
+    background-color: #f1f3f4;
 }
 
 .search-input:focus {
@@ -82,29 +154,10 @@
     border-color: #233a69;
     box-shadow: 0 1px 6px rgba(22, 32, 61, 0.28);
 }
-.search{
+
+.search {
     box-shadow: #d43835;
 }
-
-
-.signup-btn{
-    background-color: var(--color-secondary);
-    border: none;
-    border-radius: var(--border-radius);
-    padding: 10px 22px;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.signup-btn:hover {
-    background-color: var(--color-primary);
-    transform: translateY(-2px);
-}
-
-/* New styles for user info display */
 .user-info {
     display: flex;
     align-items: center;
@@ -117,27 +170,47 @@
     font-size: 16px;
 }
 
-
-/* Cart button styles */
-.Cart-btn {
-    background-color: var(--color-secondary);
+.signup-link {
+    background: none;
     border: none;
-    border-radius: 8px;
-    padding: 10px 22px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex-shrink: 0;
     color: white;
-    font-weight: bold;
+    font-weight: 500;
     font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
-.Cart-btn:hover {
-    background-color: var(--color-primary);
-    transform: translateY(-2px);
+.signup-link:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
 }
 
-/* New styles for the product navigation links */
+.cart-container {
+    position: relative;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -8px;
+    background-color: var(--color-accent, red);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    font-weight: bold;
+    min-width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .nav-links {
     display: inline-flex;
     align-items: center;
@@ -146,29 +219,37 @@
     gap: 30px;
     height: 30px;
     width: 100%;
-    padding: 10px 40px; /* Consistent padding */
+    padding: 10px 40px;
     border-top: 1px solid var(--color-border);
-    
 }
-.nav-items{
+
+.nav-items {
     display: inline-flex;
     align-items: center;
     gap: 50px;
     height: 30px;
     width: 100%;
-    padding: 10px 40px; /* Consistent padding */
+    padding: 10px 40px;
     justify-content: center;
-    padding: 0; /* Remove default ul padding */
+    padding: 0;
+}
+
+.nav-items li {
+    list-style: none;
 }
 
 .nav-items a {
-    text-decoration: none;
-    color: white;
+    text-decoration: none !important;
+    color: inherit;
     font-size: 16px;    
     font-weight: 500;
     position: relative;
     padding-bottom: 5px;
     transition: color 0.3s ease;
+}
+
+.nav-items a:hover {
+    color: #4CAF50;
 }
 
 .nav-items a::after {
@@ -182,15 +263,7 @@
     transition: width 0.3s ease;
 }
 
-.nav-items li {
-    list-style: none;
-}
-
-.banner-container {
-    position: relative;
-}
-
-.nav-button{
+.nav-button {
     background-color: var(--color-secondary);
     border: none;
     border-radius: 8px;
@@ -204,27 +277,28 @@
     color: white;
 }
 
-
-.nav-button:hover{
+.nav-button:hover {
     background-color: var(--color-primary);
     transform: translateY(-2px);
-
+}
+.banner-container {
+    margin-top: 0;
+    position: relative;
 }
 
-/*banner*/
-.Banner{
-    width: 100%; /* Make banner take full width */
-    height: 400px; /* Example height, adjust as needed */
-    overflow: hidden; /* Hide parts of the image that overflow */
-    position: relative; /* For positioning child elements if any */
-    margin-bottom: 10px; /* Add some space below the banner */
+.Banner {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 10px;
+    margin-top: 0;
 }
 
 .Banner img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure image covers the banner area */
-    
+    object-fit: cover;
 }
 
 .banner-text {
@@ -242,7 +316,7 @@
     font-size: 35px;
     font-weight: bold;
     margin-left: 0px;
-    font-family:   'style';
+    font-family: 'style';
 }
 
 .banner-text p {
@@ -250,7 +324,22 @@
     position: absolute;
     top: 50px;
     font-size: 18px;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.banner-image {
+    position: absolute;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
+    width: 350px;
+}
+
+.banner-image img {
+    width: 100%;
+    height: 400px;
+    filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.5));
+    margin-top: 40px;
 }
 
 .shop-now-btn {
@@ -263,26 +352,17 @@
     font-weight: bold;
     cursor: pointer;
     position: relative;
-    margin-top: 120px; /* Pushes it down from the text */
+    margin-top: 120px;
     transition: all 0.3s ease;
-
 }
 
 .shop-now-btn:hover {
     background-color: #f1f1f1;
     transform: translateY(-2px);
 }
-.banner-image {
-    position: absolute;
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
-    width: 350px; /* Adjust size as needed */
-}
-
-.banner-image img {
-    width: 100%;
-    height: 400px;
-    filter: drop-shadow(0px 5px 15px rgba(0, 0, 0, 0.5)); /* Adds a nice shadow */
-    margin-top: 40px;
+@media (max-width: 768px) {
+    .navbar {
+        display: flex;
+        flex-direction: column;
+    }
 }

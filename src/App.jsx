@@ -9,6 +9,7 @@ import './App.css'
 
 // Lazy load the page components
 const CentralPage = React.lazy(() => import('./stores/pages/CentralPage'));
+const LandingPage = React.lazy(() => import('./stores/pages/Landing/LandingPage'));
 const ClothesSection = React.lazy(() => import('./stores/pages/Clothes'));
 const FurnitureSection = React.lazy(() => import('./stores/pages/Furniture'));
 const ElectronicsSection = React.lazy(() => import('./stores/pages/Electronics'));
@@ -27,7 +28,8 @@ function App() {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           {/* Each Route component maps a URL path to a specific React component. */}
-          <Route path='/' element={<CentralPage />} />
+          <Route path='/' element={<LandingPage />} />
+          <Route path='/products' element={<CentralPage />} />
           <Route path='/clothes' element={<ClothesSection />} />
           <Route path='/furniture' element={<FurnitureSection />} />
           <Route path='/electronics' element={<ElectronicsSection />} />

@@ -2,100 +2,125 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
 import Navbar from "../components/Navbar";
+import "../components/Products.css";
 import { addToCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ProductsNotFound } from "./ProductsNotFound";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-// --- Interfaces for the external API ---
-// Tailor these to the fields you actually use.
 interface Category {
   id: number;
   name: string;
 }
 
 interface Product {
-  id: number;
+  id: number;   
   title: string;
   price: number;
-  images: string[];            // API returns an array of image URLs
-  category?: Category | null;  // category can be missing or null sometimes
-  // add other fields you use later (description, etc.)
+  images: string[];
+  category?: Category | null;
 }
 
 const ClothesSection: React.FC = () => {
-  // typed states
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [products, setProducts] = useState<Product[]>(() => {
+    const cached = localStorage.getItem("products_cache");
+    return cached ? JSON.parse(cached) : [];
+  });
+
+  const [loading, setLoading] = useState<boolean>(
+    () => !localStorage.getItem("products_cache")
+  );
+
   const [error, setError] = useState<string | null>(null);
-
-  // ---- Redux dispatch typing options ----
-  // QUICK option (works but less strict):
-  const dispatch = useDispatch(); // type is `any` or unknown depending on your tsconfig
-
-  // BETTER option: create a typed hook in your redux store file:
-  // export type AppDispatch = typeof store.dispatch;
-  // export const useAppDispatch = () => useDispatch<AppDispatch>();
-  // then: const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
+    // --- SAME LOGIC AS Products.jsx ---
+    if (products.length > 0) return; // use cache, don’t refetch
+
     async function fetchData() {
       try {
         const response = await fetch(
-          "https://api.escuelajs.co/api/v1/products?offset=0&limit=50"
+          "https://api.escuelajs.co/api/v1/products?offset=0&limit=200"
         );
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        // Tell TS we expect an array of Product (runtime still decides)
-        const result = (await response.json()) as unknown as Product[];
 
-        // Filter for Clothes and ensure images exist
-        const clothesProducts = result.filter((product) =>
-          product?.category?.name === "Clothes" &&
-          Array.isArray(product.images) &&
-          product.images.length > 0
+        const result: Product[] = await response.json();
+
+        // Keep only valid products (same base dataset as Products.jsx)
+        const validProducts = result.filter(
+          (p) => Array.isArray(p.images) && p.images.length > 0
         );
 
-        setProducts(clothesProducts);
+        // Store once for ALL pages
+        localStorage.setItem(
+          "products_cache",
+          JSON.stringify(validProducts)
+        );
+
+        setProducts(validProducts);
       } catch (e: unknown) {
-        // cast to string safely
-        setError((e as Error)?.message ?? String(e));
+        setError(e instanceof Error ? e.message : String(e));
       } finally {
         setLoading(false);
       }
     }
 
     fetchData();
-  }, []); // run once
+  }, []);
 
-  if (loading) return <div><LoadingSpinner /></div>;
+  if (loading)
+    return (
+      <div className="loading">
+        <LoadingSpinner />
+      </div>
+    );
+
   if (error) return <div>Error: {error}</div>;
+
+  // ---- FILTER CLOTHES FROM SHARED CACHE ----
+  const clothesProducts = products.filter(
+    (p) =>
+      p.category &&
+      typeof p.category.name === "string" &&
+      p.category.name.toLowerCase().includes("clothes")
+  );
 
   return (
     <>
       <Navbar />
+
       <div className="product-container">
         <h1 className="product-title">Clothes</h1>
+
         <div className="pro-section">
-          {products.length > 0 ? (
-            products.map((product) => (
+          {clothesProducts.length > 0 ? (
+            clothesProducts.map((product) => (
               <div key={product.id} className="product-card">
-                <Link to={`/product/${product.id}`} className="product-link">
-                  {/* safe access to images */}
+                <Link
+                  to={`/product/${product.id}`}
+                  className="product-link"
+                >
                   <img
                     src={product.images[0]}
                     alt={product.title}
                     className="product-image"
+                    loading="lazy"
                   />
                 </Link>
-                <h4>{product.title}</h4>
+
+                <h4 className="product-name">{product.title}</h4>
+
                 <div className="product-details">
                   <p className="product-price">${product.price}</p>
+
                   <button
-                    onClick={() => dispatch(addToCart(product))}
                     className="add-to-cart-button"
+                    onClick={() => dispatch(addToCart(product))}
                   >
                     Add to Cart
                   </button>
@@ -103,9 +128,7 @@ const ClothesSection: React.FC = () => {
               </div>
             ))
           ) : (
-            <p>
-              <ProductsNotFound />
-            </p>
+            <ProductsNotFound />
           )}
         </div>
       </div>

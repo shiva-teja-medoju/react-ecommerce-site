@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../../App.css";
 import Navbar from "../components/Navbar";
+import "../components/Products.css";
 import { addToCart } from "../../redux/cartSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { ProductsNotFound } from "./ProductsNotFound";
 import LoadingSpinner from "../components/LoadingSpinner";
 
-// --- Interfaces for the external API ---
 interface Category {
   id: number;
   name: string;
@@ -22,85 +22,116 @@ interface Product {
 }
 
 const ElectronicsSection: React.FC = () => {
-  // State to store the fetched data, loading status, and any errors.
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [products, setProducts] = useState<Product[]>(() => {
+    const cached = localStorage.getItem("products_cache");
+    return cached ? JSON.parse(cached) : [];
+  });
+
+  const [loading, setLoading] = useState<boolean>(
+    () => !localStorage.getItem("products_cache")
+  );
+
   const [error, setError] = useState<string | null>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // Define the async function to fetch data inside useEffect
+    // Same rule as Products.jsx: use cache if it already exists
+    if (products.length > 0) return;
+
     async function fetchData() {
       try {
         const response = await fetch(
-          "https://api.escuelajs.co/api/v1/products?offset=0&limit=50"
+          "https://api.escuelajs.co/api/v1/products?offset=0&limit=200"
         );
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        const result = (await response.json()) as unknown as Product[];
 
-        // Filter for "Electronics" and ensure the product has valid images.
-        const electronicsProducts = result.filter(
-          (product) =>
-            product.category?.name === "Electronics" &&
-            Array.isArray(product.images) &&
-            product.images.length > 0
+        const result: Product[] = await response.json();
+
+        // Keep only valid products (same base dataset as Products.jsx)
+        const validProducts = result.filter(
+          (p) => Array.isArray(p.images) && p.images.length > 0
         );
 
-        console.log(electronicsProducts);
-        setProducts(electronicsProducts);
+        // Store once for ALL pages
+        localStorage.setItem(
+          "products_cache",
+          JSON.stringify(validProducts)
+        );
+
+        setProducts(validProducts);
       } catch (e: unknown) {
-        setError((e as Error)?.message ?? String(e));
+        setError(e instanceof Error ? e.message : String(e));
       } finally {
         setLoading(false);
       }
     }
 
-    // Call the fetch function
     fetchData();
-  }, []); // The empty dependency array [] ensures this effect runs only once.
+  }, []);
 
-  if (loading) return <div><LoadingSpinner /></div>;
+  if (loading)
+    return (
+      <div className="loading">
+        <LoadingSpinner />
+      </div>
+    );
+
   if (error) return <div>Error: {error}</div>;
 
-  // Render the fetched data
+  // ---- FILTER ELECTRONICS FROM SHARED CACHE ----
+  const electronicsProducts = products.filter(
+    (p) =>
+      p.category &&
+      typeof p.category.name === "string" &&
+      p.category.name.toLowerCase().includes("electronics")
+  );
+
   return (
     <>
       <Navbar />
-      <div>
-        <div className="product-container">
-          <h1 className="product-title">Electronics</h1>
-          <div className="pro-section">
-            {products.length > 0 ? (
-              products.map((product) => (
-                <div key={product.id} className="product-card">
-                  <Link to={`/product/${product.id}`} className="product-link">
+
+      <div className="product-container">
+        <h1 className="product-title">Electronics</h1>
+
+        <div className="pro-section">
+          {electronicsProducts.length > 0 ? (
+            electronicsProducts.map((product) => (
+              <div key={product.id} className="product-card">
+                <Link
+                  to={`/product/${product.id}`}
+                  className="product-link"
+                >
                   <img
                     src={product.images[0]}
                     alt={product.title}
                     className="product-image"
+                    loading="lazy"
                   />
-                  </Link>
-                  <h4>{product.title}</h4>
-                  <div className="product-details">
-                    <p className="product-price">${product.price}</p>
-                    <button
-                      className="add-to-cart-button"
-                      onClick={() => dispatch(addToCart(product))}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
+                </Link>
+
+                <h4 className="product-name">{product.title}</h4>
+
+                <div className="product-details">
+                  <p className="product-price">${product.price}</p>
+                  <button
+                    className="add-to-cart-button"
+                    onClick={() => dispatch(addToCart(product))}
+                  >
+                    Add to Cart
+                  </button>
                 </div>
-              ))
-            ) : (
-              <p><ProductsNotFound /></p>
-            )}
-          </div>
+              </div>
+            ))
+          ) : (
+            <ProductsNotFound />
+          )}
         </div>
       </div>
     </>
   );
-}
+};
+
 export default ElectronicsSection;
