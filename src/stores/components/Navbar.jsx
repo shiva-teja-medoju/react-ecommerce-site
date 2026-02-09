@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import Banner from '../../assets/Banner.png';
+import Banner from '../../assets/banner.png';
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowCart } from "../../redux/cartSlice";
