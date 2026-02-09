@@ -37,10 +37,10 @@ function ProductsSection() {
 
   useEffect(() => {
 
-    if (products.length > 0) return;
+    if (products.length > 50) return;
     async function fetchData() {
       try {
-        const response = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=50');
+        const response = await fetch('https://api.escuelajs.co/api/v1/products?offset=0&limit=200');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

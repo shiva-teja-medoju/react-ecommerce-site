@@ -52,7 +52,7 @@ const ClothesSection: React.FC = () => {
 
   useEffect(() => {
     // --- SAME LOGIC AS Products.jsx ---
-    if (products.length > 0) return; // use cache, don’t refetch
+    if (products.length > 50) return; // use cache, don’t refetch
 
     async function fetchData() {
       try {
