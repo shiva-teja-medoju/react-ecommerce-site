@@ -1,7 +1,7 @@
 # 🛒 E-Shopping Application
 **A Modern, Scalable E-Commerce Experience Built with React, Redux, and TypeScript**
 
-Welcome to **E-Shopping**, a high-performance, responsive e-commerce web application. This project demonstrates professional front-end architecture, including robust state management, automated testing, and a seamless user journey from product discovery to checkout.
+Welcome to **AURA**, a high-performance, responsive e-commerce web application. This project demonstrates professional front-end architecture, including robust state management, automated testing, and a seamless user journey from product discovery to checkout.
 
 ---
 🔗 **Live Demo:** [Try AURA Live](https://react-ecommerce-site-two.vercel.app/)
