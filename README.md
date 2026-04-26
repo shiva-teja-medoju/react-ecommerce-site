@@ -105,10 +105,7 @@ pnpm preview
 pnpm install
 ```
 
-**10. Install Dependencies**
-```bash
-pnpm install
-```
+
 
 ---
 
