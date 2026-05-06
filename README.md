@@ -62,7 +62,7 @@ Make sure the following tools are installed on your system:
 
 **1. Clone the Repository**
 ```bash
-git clone [https://github.com/shiva-teja-medoju/react-ecommerce-site.git](https://github.com/shiva-teja-medoju/react-ecommerce-site.git)
+git clone https://github.com/shiva-teja-medoju/react-ecommerce-site.git
 ```
 
 **2. Navigate to Project Directory**
