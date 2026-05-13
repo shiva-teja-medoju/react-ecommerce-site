@@ -1,123 +1,220 @@
-# 🛒 FUll STACK ECOMMERCE APPLICATION
-**A Modern, Scalable E-Commerce Experience Built with React, Redux, and TypeScript**
+# 🛒 AURA — Full Stack MERN E-Commerce Application
 
-Welcome to **AURA**, a high-performance, responsive e-commerce web application. This project demonstrates professional front-end architecture, including robust state management, automated testing, and a seamless user journey from product discovery to checkout.
+AURA is a modern full-stack e-commerce web application built using the MERN stack architecture. The project focuses on scalable frontend structure, secure authentication workflows, persistent cart management, and real-world backend integration.
+
+The application demonstrates practical full-stack engineering concepts including JWT authentication, MongoDB integration, protected API routes, OTP-based password recovery, Redux state management, and modular feature-driven architecture.
 
 ---
-🔗 **Live Demo:** [Try AURA Live](https://react-ecommerce-site-two.vercel.app/)
+
+## 🔗 Live Demo
+
+Frontend Deployment:  
+https://react-ecommerce-site-two.vercel.app/
+
+> Backend deployment is currently under production preparation.
+
 ---
 
-## ✨ Key Features
+# ✨ Core Features
 
-| Feature | Technical Implementation |
+| Feature | Implementation |
 | :--- | :--- |
-| 👤 **Secure Authentication** | Custom logic for sign-up/login with persistence. |
-| 🛍️ **Dynamic Catalog** | Product listing with category filtering and real-time search. |
-| 🛒 **Advanced Cart System** | Redux-powered cart with quantity controls and local storage sync. |
-| 🍞 **Toast Notifications** | Real-time UI feedback using `react-toastify`. |
-| 🧪 **Unit Testing** | Component and logic verification via `Vitest` and `React Testing Library`. |
-| 📱 **Responsive Design** | Mobile-first approach for seamless shopping across all devices. |
+| 🔐 User Authentication | JWT-based login & signup system |
+| 📧 Forgot Password System | OTP email verification using Nodemailer |
+| 🛒 Persistent Shopping Cart | Redux cart persistence with user-based storage |
+| 🔎 Product Search & Filtering | Real-time filtering and category-based navigation |
+| 📦 External Product API Integration | Dynamic product data fetching |
+| ⚡ Modern Frontend Architecture | Feature-based scalable React structure |
+| 🌐 REST API Backend | Express.js API architecture |
+| 🗄️ MongoDB Database Integration | User authentication & cart persistence |
+| 📱 Responsive Design | Optimized for desktop and mobile devices |
 
 ---
 
+# 🧠 Tech Stack
 
-## 🧠 Tech Stack & Tooling
+## Frontend
+- React
+- Redux Toolkit
+- React Router DOM
+- Vite
+- CSS3
+- React Toastify
 
-| Category | Technologies & Tools |
-| :--- | :--- |
-| 🖥️ **Frontend Core** | **React 19** (Functional Components, Hooks) |
-| 🛡️ **Languages** | **TypeScript** (Type Safety) & JavaScript (ES6+) |
-| 🔁 **State Management** | **Redux Toolkit** (Slices, Async Thunks) |
-| 🛣️ **Routing** | **React Router 7** |
-| 🎨 **Styling & UI** | HTML5, CSS3 (Modular & Responsive Design) |
-| ⚙️ **Build Tool** | **Vite** (Ultra-fast Hot Module Replacement) |
-| 📦 **Package Manager** | **pnpm** (High-performance dependency management) |
-| 🧪 **Testing Suite** | **Vitest** & **React Testing Library** |
-| 🌐 **API Interaction** | Browser Fetch API |
-| 🚀 **Deployment** | **Vercel** (Automated CI/CD Pipeline) |
-| 💻 **Environment** | Node.js (v18+) |
+## Backend
+- Node.js
+- Express.js
+- MongoDB Atlas
+- Mongoose
+- JWT Authentication
+- bcryptjs
+- Nodemailer
 
----
-
-## 🧩 Architecture Overview
-
-The application follows a **modular structure** designed for scalability:
-- **Redux Slices:** Decoupled logic for Auth, Cart, and Products.
-- **Components:** Atomic design principles for reusable UI elements.
-- **Testing:** Integrated unit tests to ensure reliability across updates.
-![E-Shopping Application Preview](https://github.com/user-attachments/assets/ae209311-cb62-4ee7-a374-7d3e0ce7de20)
----
-
-## 🚀 Getting Started
-
-### ✅ Prerequisites  
-Make sure the following tools are installed on your system:
-- **Node.js** (v18+ recommended)  
-- **npm** (Node Package Manager)  
-- **Git**
+## Development Tools
+- Git & GitHub
+- Vercel
+- Thunder Client
+- VS Code
 
 ---
 
-### ⚙️ Installation Steps  
+# 🏗️ Project Architecture
 
-**1. Clone the Repository**
+The project follows a modular and scalable architecture:
+
+```bash
+src/
+├── app/
+├── assets/
+├── components/
+├── features/
+├── hooks/
+├── layout/
+├── redux/
+├── services/
+├── styles/
+└── utills/
+
+server/
+├── config/
+├── controllers/
+├── middleware/
+├── models/
+├── routes/
+└── server.js
+```
+
+---
+
+# 🔐 Authentication Features
+
+- User Registration
+- Secure Password Hashing
+- JWT Authentication
+- Protected Backend Routes
+- Persistent Login State
+- Forgot Password Workflow
+- OTP Email Verification
+- Secure Password Reset Architecture
+
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+Make sure you have installed:
+
+- Node.js (v18+ recommended)
+- npm
+- Git
+
+---
+
+# ⚙️ Frontend Setup
+
+## 1. Clone Repository
+
 ```bash
 git clone https://github.com/shiva-teja-medoju/react-ecommerce-site.git
 ```
 
-**2. Navigate to Project Directory**
+## 2. Navigate Into Project
+
 ```bash
 cd react-ecommerce-site
 ```
 
-**3. Install Dependencies**
+## 3. Install Frontend Dependencies
+
 ```bash
-pnpm install
+npm install
 ```
-
-**4. Create Environment File Create a file named .env in the root folder and add:**
-```bash
-VITE_API_BASE_URL=[https://api.escuelajs.co/api/v1](https://api.escuelajs.co/api/v1)
-```
-
-**5. Run the Application (Development Mode)**
-```bash
-pnpm dev
-```
-
-**6. Running Tests**
-```bash
-pnpm test
-```
-
-**7. Build for Production**
-```bash
-pnpm build
-```
-
-**8. Preview production build**
-```bash
-pnpm preview
-```
-
-**9. Install Dependencies**
-```bash
-pnpm install
-```
-
-
 
 ---
 
+# ⚙️ Backend Setup
 
+## 1. Navigate Into Server
+
+```bash
+cd server
+```
+
+## 2. Install Backend Dependencies
+
+```bash
+npm install
+```
+
+## 3. Create Environment File
+
+Create a `.env` file inside:
+
+```bash
+server/
+```
+
+Add:
+
+```env
+PORT=5000
+
+MONGODB_URI=your_mongodb_connection
+
+JWT_SECRET=your_secret_key
+
+EMAIL_USER=your_email@gmail.com
+
+EMAIL_PASS=your_app_password
+```
 
 ---
 
-### 💡 Author
+# ▶️ Running the Project
+
+## Start Frontend
+
+From root folder:
+
+```bash
+npm run dev
+```
+
+## Start Backend
+
+From server folder:
+
+```bash
+npm run server
+```
+
+---
+
+# 📌 Current Development Status
+
+### ✅ Completed
+- Frontend Refactor
+- MERN Backend Integration
+- Authentication System
+- Redux State Architecture
+- MongoDB Integration
+- OTP Email Workflow Foundation
+
+### 🚧 In Progress
+- Production Deployment
+- Protected Routes Expansion
+- Password Reset Completion
+- Backend Production Optimization
+
+---
+
+# 💡 Author
 
 ## Shiva Teja Medoju
-> Passionate Full-Stack Developer | Building Scalable Web pages
 
+Full Stack Developer focused on scalable MERN applications, frontend architecture, and modern web experiences.
 
-📧 Connect on [LinkedIn](https://www.linkedin.com/in/shivatejamedoju)
-[Email](shivatejamedoju@gmail.com)
+- LinkedIn: https://www.linkedin.com/in/shivatejamedoju
+- GitHub: https://github.com/shiva-teja-medoju
+- Email: shivatejamedoju@gmail.com
