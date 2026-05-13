@@ -1,22 +1,22 @@
 
 import React, { Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
-import ScrollToTop from './stores/components/ScrollToTop'
+import ScrollToTop from './components/layout/ScrollToTop/ScrollToTop'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import './App.css'
 
 // Lazy load the page components
-const CentralPage = React.lazy(() => import('./stores/pages/CentralPage'));
-const LandingPage = React.lazy(() => import('./stores/pages/Landing/LandingPage'));
-const ClothesSection = React.lazy(() => import('./stores/pages/Clothes'));
-const FurnitureSection = React.lazy(() => import('./stores/pages/Furniture'));
-const ElectronicsSection = React.lazy(() => import('./stores/pages/Electronics'));
-const ShoesSection = React.lazy(() => import('./stores/pages/Shoes.tsx'));
-const MiscellaneousSection = React.lazy(() => import('./stores/pages/Miscellaneous.tsx'));
-const SingleProduct = React.lazy(() => import('./SingleProduct/SingleProduct'));
-const Checkout = React.lazy(() => import('./stores/components/Checkout'));
+const CentralPage = React.lazy(() => import('./components/product/Products/Products'));
+const LandingPage = React.lazy(() => import('./features/home/LandingPage'));
+const ClothesSection = React.lazy(() => import('./features/products/pages/Clothes.tsx'));
+const FurnitureSection = React.lazy(() => import('./features/products/pages/Furniture.tsx'));
+const ElectronicsSection = React.lazy(() => import('./features/products/pages/Electronics.tsx'));
+const ShoesSection = React.lazy(() => import('./features/products/pages/Shoes.tsx'));
+const MiscellaneousSection = React.lazy(() => import('./features/products/pages/Miscellaneous.tsx'));
+const SingleProduct = React.lazy(() => import('./components/product/SingleProduct/SingleProduct'));
+const Checkout = React.lazy(() => import('./features/cart/pages/Checkout'));
 
 function App() {
   return (

@@ -1,15 +1,29 @@
-# Dependencies
-node_modules
-.pnpm-store
+# dependencies
+node_modules/
 
-# Production build
-dist
-build
+# build files
+dist/
+build/
 
-# Environment variables
-.env
-.env.local
+# vite
+.vite/
 
-# Logs and OS files
+# logs
+logs
+*.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# environment variables
+.env
+
+# editor files
+.vscode/
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# testing
+coverage/
