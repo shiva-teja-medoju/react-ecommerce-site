@@ -1,4 +1,4 @@
-# 🛒 E-Shopping Application
+# 🛒 FUll STACK ECOMMERCE APPLICATION
 **A Modern, Scalable E-Commerce Experience Built with React, Redux, and TypeScript**
 
 Welcome to **AURA**, a high-performance, responsive e-commerce web application. This project demonstrates professional front-end architecture, including robust state management, automated testing, and a seamless user journey from product discovery to checkout.
